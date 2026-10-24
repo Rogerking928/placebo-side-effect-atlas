@@ -64,7 +64,7 @@ svg text{fill:var(--muted);font-family:var(--f-body)}
 <div class="wrap">
   <header>
     <h1>Placebo Side-Effect Atlas</h1>
-    <p class="lede">How often do people taking <b>placebo</b> in clinical trials report a given side effect? Look up the background rate by condition and follow-up, then compare a drug's reported rate against it. Built from <b id="m-trials"></b> placebo-controlled trials and <b id="m-people"></b> placebo participants on ClinicalTrials.gov.</p>
+    <p class="lede">How often do people taking <b>placebo</b> in clinical trials report a given side effect? Look up the background rate by condition and follow-up — for example, to tell patients how often a side effect occurs without any drug. Built from <b id="m-trials"></b> placebo-controlled trials and <b id="m-people"></b> placebo participants on ClinicalTrials.gov.</p>
   </header>
 
   <form class="query" id="q" autocomplete="off">
@@ -148,7 +148,8 @@ function render(){
   if (isFinite(x) && x > 0 && x < 100){
     const above = 1 - Phi((logit(x/100) - mu)/sg);
     ver.innerHTML = `In comparable trials, <b>${fmt(above)}</b> of placebo arms reported ${D.terms[ti]} at ${x}% or more. ` +
-      (above >= 0.25 ? "A rate this high is common on placebo." : above >= 0.05 ? "A rate this high is uncommon but not rare on placebo." : "A rate this high is rare on placebo.");
+      (above >= 0.25 ? "A rate this high is common on placebo." : above >= 0.05 ? "A rate this high is uncommon but not rare on placebo." : "A rate this high is rare on placebo.") +
+      " This does not show that the drug causes it. In the accompanying analysis, comparing with these rates did not identify drug-related excesses better than the drug-arm rate alone; that judgement needs a concurrent placebo group.";
   } else ver.textContent = "Enter a percentage between 0 and 100.";
   drawChart(ti, bi);
 }
